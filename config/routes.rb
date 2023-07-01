@@ -1,7 +1,6 @@
 Rails.application.routes.draw do 
-  
-  root to: 'pages#home'
 
-  get '/decode', to: 'pages#decode'
+  get '/login', to: 'users#login'
+
 end
  
