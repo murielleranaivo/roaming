@@ -20,6 +20,13 @@
     <!-- Application -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+    <title>Stage</title>
+    
+  </head>
+
+  <body id="page-top" class="bg-gradient-primary">
+    <%= yield %>
+
     <!-- Bootstrap core JavaScript-->
     <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'bootstrap.bundle.min', 'data-turbolinks-track': 'reload' %>
@@ -29,12 +36,5 @@
     
     <!-- Custom scripts for all pages-->
     <%= javascript_include_tag 'sb-admin-2.min', 'data-turbolinks-track': 'reload' %>
-
-    <title>Stage</title>
-    
-  </head>
-
-  <body class="bg-gradient-primary">
-    <%= yield %>
   </body>
 </html>
