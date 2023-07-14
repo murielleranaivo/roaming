@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class UsersController < ApplicationController
 
     def register
@@ -5,7 +7,12 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params)
+
+        @user = User.new
+        @user.username = user_params[:username]
+        @user.email = user_params[:email]
+        @user.password_digest = BCrypt::Password.create(user_params[:password_digest])
+
         if @user.save
             session[:user_id] = @user.id
             redirect_to '/login'

@@ -1,0 +1,20 @@
+<div class="container">
+  <a href="" class="btn btn-warning btn-icon-split">
+  <span class="icon text-white-50">
+    <%= fa_icon "folder" %>
+  </span>
+    <span class="text">Open TAP file</span>
+  </a>
+
+  <div id="jsTree"></div>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          $('#jsTree').jstree({
+              'core': {
+                  'data': [<%= @transfer_batch_json.html_safe %>]
+              }
+          });
+      });
+  </script>
+</div>

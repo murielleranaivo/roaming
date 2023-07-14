@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class SessionsController < ApplicationController
 
     def login
@@ -8,7 +10,7 @@ class SessionsController < ApplicationController
         #lookup the user in the database
         @user = User.find_by(email: user_params[:email])
         #compare their password
-        if @user && @user.password_digest == user_params[:password_digest]
+        if @user && @user.password_digest == BCrypt::Password.create(user_params[:password_digest])
             session[:user_id] = @user.id
             redirect_to '/index'
         else

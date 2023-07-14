@@ -1,6 +1,7 @@
 Rails.application.routes.draw do 
+  get 'taps/index'
   
-  root to: 'sessions#login'
+  root to: 'taps#index'
   get '/login', to: 'sessions#login'
 
   post '/sessions', to: 'sessions#create'

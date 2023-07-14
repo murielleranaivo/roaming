@@ -13,6 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+/*
+ *= require font-awesome
+ */
+
 html, body {
     height: 100%;
 }

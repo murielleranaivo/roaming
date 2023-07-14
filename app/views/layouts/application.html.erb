@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Font Awesome -->
-    <%= stylesheet_link_tag 'all.min', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
+    <!-- JS Tree -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
     <!-- Nunito -->
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
 
     <!-- SB Admin -->
     <%= stylesheet_link_tag 'sb-admin-2.min', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -21,20 +20,23 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <title>Stage</title>
-    
+
   </head>
 
   <body id="page-top" class="bg-gradient-primary">
     <%= yield %>
 
-    <!-- Bootstrap core JavaScript-->
-    <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track': 'reload' %>
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
     <%= javascript_include_tag 'bootstrap.bundle.min', 'data-turbolinks-track': 'reload' %>
 
-    <!-- Core plugin JavaScript-->
+    <!-- Core plugin JavaScript -->
     <%= javascript_include_tag 'jquery.easing.min', 'data-turbolinks-track': 'reload' %>
-    
-    <!-- Custom scripts for all pages-->
+
+    <!-- Custom scripts for all pages -->
     <%= javascript_include_tag 'sb-admin-2.min', 'data-turbolinks-track': 'reload' %>
+
+    <!-- JSTree -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
   </body>
 </html>
