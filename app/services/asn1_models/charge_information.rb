@@ -32,13 +32,23 @@ class ChargeInformation
     end
     new(charged_item, exchange_rate_code, charge_detail_list, call_type_group)
   end
-
+  
   def as_json(options = {})
     {
-      charged_item: @charged_item,
-      exchange_rate_code: @exchange_rate_code,
-      charge_detail_list: @charge_detail_list,
-      call_type_group: @call_type_group
+      text: 'ChargeInformation',
+      children: [
+        { text: "ChargedItem: #{@charged_item}" },
+        { text: "ExchangeRateCode: #{@exchange_rate_code}" },
+        {
+          text: 'ChargeDetailList',
+          children: @charge_detail_list
+        },
+        {
+          text: 'CallTypeGroup',
+          children: @call_type_group
+        }
+      ]
+
     }
   end
 

@@ -20,10 +20,17 @@ class ChargeDetail
 
   def as_json(options = {})
     {
-      charge_type: @charge_type,
-      charge: @charge,
-      charged_units: @charged_units,
-      charge_detail_timestamp: @charge_detail_timestamp
+      text: 'ChargeDetail',
+      children: [
+        { text: "ChargeType: #{@charge_type}" },
+        { text: "Charge: #{@charge}" },
+        { text: "ChargedUnits: #{@charged_units}" },
+        {
+          text: 'ChargeDetailTimestamp',
+          children: @charge_detail_timestamp
+        }
+      ]
+
     }
   end
 

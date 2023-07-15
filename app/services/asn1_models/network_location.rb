@@ -20,10 +20,14 @@ class NetworkLocation
 
   def as_json(options = {})
     {
-      rec_entity_code: @rec_entity_code,
-      call_reference: @call_reference,
-      location_area: @location_area,
-      cell_id: @cell_id
+      text: "NetworkLocation",
+      children: [
+        { text: "RecEntityCode: #{@rec_entity_code}" },
+        { text: "CallReference: #{@call_reference}" },
+        { text: "LocationArea: #{@location_area}" },
+        { text: "CellId: #{@cell_id}" }
+      ]
+
     }
   end
 

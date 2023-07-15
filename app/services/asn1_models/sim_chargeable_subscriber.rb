@@ -13,11 +13,15 @@ class SimChargeableSubscriber
     msisdn = Utils.ascii_to_s(map[1][152])
     new(imsi, msisdn)
   end
-
+  
   def as_json(options = {})
     {
-      imsi: @imsi,
-      msisdn: @msisdn
+      text: 'SimChargeableSubscriber',
+      children: [
+        { text: "Imsi: #{@imsi}" },
+        { text: "Msisdn: #{@msisdn}" }
+      ]
+
     }
   end
 

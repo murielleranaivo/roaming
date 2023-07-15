@@ -30,16 +30,30 @@ class BasicCallInformation
     end
     call_event_start_timestamp = TimestampOffset.from_map(map[2][44])
     total_call_event_duration = Utils.ascii_to_i(map[3][223])
-    new(chargeable_subscriber, call_event_start_timestamp, total_call_event_duration, call_originator)
+    new(chargeable_subscriber, call_event_start_timestamp, total_call_event_duration, call_originator, destination)
   end
 
   def as_json(options = {})
+    if @destination == nil
+      temp = @call_originator
+    else
+      temp = @destination
+    end
     {
-      chargeable_subscriber: @chargeable_subscriber,
-      destination: @destination,
-      call_originator: @call_originator,
-      call_event_start_timestamp: @call_event_start_timestamp,
-      total_call_event_duration: @total_call_event_duration
+      text: 'BasicCallInformation',
+      children: [
+        {
+          text: 'ChargeableSubscriber',
+          children: @chargeable_subscriber
+        },
+        temp,
+        {
+          text: 'CallEventStartTimestamp',
+          children: @call_event_start_timestamp
+        },
+        { text: "TotalCallEventDuration: #{@total_call_event_duration}" }
+      ]
+
     }
   end
 

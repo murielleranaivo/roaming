@@ -16,8 +16,11 @@ class TimestampOffset
 
   def as_json(options = {})
     {
-      local_timestamp: @local_timestamp,
-      utc_time_offset_code: @utc_time_offset_code
+      text: "TimeStampOffset",
+      children: [
+        { text: "LocalTimestamp: #{@local_timestamp}" },
+        { text: "UtcTimeOffsetCode: #{@utc_time_offset_code}" }
+      ]
     }
   end
 

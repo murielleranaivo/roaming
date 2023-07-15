@@ -12,16 +12,21 @@ class CallOriginator
     if map[0][405] != nil
       calling_number = Utils.ascii_to_s(map[0][405])
     end
-    if map[0][425] != nil
-      sms_originator = Utils.ascii_to_s(map[0][425])
+    if map.length > 1
+      if map[1][425] != nil
+        sms_originator = map[1][425]
+      end
     end
     new(calling_number, sms_originator)
   end
 
   def as_json(options = {})
     {
-      calling_number: @calling_number,
-      sms_originator: @sms_originator
+      text: "CallOriginator",
+      children: [
+        { text: "CallingNumber: #{@calling_number}" },
+        { text: "SmsOriginator: #{@sms_originator}" }
+      ]
     }
   end
 

@@ -14,7 +14,12 @@ class BasicService
 
   def as_json(options = {})
     {
-      service_code: @service_code
+      text: 'ServiceCode',
+      children:
+        {
+          text: 'ServiceCode',
+          children: @service_code
+        }
     }
   end
 

@@ -18,9 +18,9 @@ class CallTypeGroup
 
   def as_json(options = {})
     {
-      call_type_level_1: @call_type_level_1,
-      call_type_level_2: @call_type_level_2,
-      call_type_level_3: @call_type_level_3
+      text: "CallTypeLevel1: #{@call_type_level_1}",
+      text: "CallTypeLevel2: #{@call_type_level_2}",
+      text: "CallTypeLevel3: #{@call_type_level_3}"
     }
   end
 

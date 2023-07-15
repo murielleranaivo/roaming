@@ -24,9 +24,22 @@ class BasicServiceUsed
 
   def as_json(options = {})
     {
-      basic_service: @basic_service,
-      charging_timestamp: @charging_timestamp,
-      charge_information_list: @charge_information_list
+      text: 'BasicServiceUsed',
+      children: [
+        {
+          text: 'BasicService',
+          children: @basic_service
+        },
+        {
+          text: 'ChargingTimestamp',
+          children: @charging_timestamp
+        },
+        {
+          text: 'ChargeInformationList',
+          children: @charge_information_list
+        }
+      ]
+
     }
   end
 

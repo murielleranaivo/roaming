@@ -11,10 +11,17 @@ class LocationInformation
     network_location = NetworkLocation.from_map(map[0][156])
     new(network_location)
   end
-
+  
   def as_json(options = {})
     {
-      network_location: @network_location
+      text: 'LocationInformation',
+      children: [
+        {
+          text: 'NetworkLocation',
+          children: @network_location
+        }
+      ]
+
     }
   end
 

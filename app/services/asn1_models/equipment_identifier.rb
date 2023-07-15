@@ -14,7 +14,10 @@ class EquipmentIdentifier
 
   def as_json(options = {})
     {
-      imei: @imei
+      text: "EquipmentIdentifier",
+      children: [
+        { text: "Imei: #{@imei}" }
+      ]
     }
   end
 

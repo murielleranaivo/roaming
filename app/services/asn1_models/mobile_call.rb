@@ -5,7 +5,7 @@ require_relative 'basic_service_used'
 require_relative 'operator_spec_information'
 
 class MobileCall
-  attr_accessor :basic_call_information, :location_information, :equipment_identifier, :basic_service_used_list, :operator_spec_information
+  attr_accessor :basic_call_information, :location_information, :equipment_identifier, :basic_service_used_list, :operator_spec_information, :text
 
   def initialize(basic_call_information, location_information, equipment_identifier, basic_service_used_list, operator_spec_information)
     @basic_call_information = basic_call_information
@@ -36,11 +36,15 @@ class MobileCall
 
   def as_json(options = {})
     {
-      basic_call_information: @basic_call_information,
-      location_information: @location_information,
-      equipment_identifier: @equipment_identifier,
-      basic_service_used_list: @basic_service_used_list,
-      operator_spec_information: @operator_spec_information
+      text: text,
+      children: [
+        @basic_call_information,
+        @location_information,
+        @equipment_identifier,
+        @basic_service_used_list,
+        @operator_spec_information
+      ]
+
     }
   end
 
