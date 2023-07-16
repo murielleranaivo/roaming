@@ -5,7 +5,7 @@ require_relative 'basic_service_used'
 require_relative 'operator_spec_information'
 
 class MobileCall
-  attr_accessor :basic_call_information, :location_information, :equipment_identifier, :basic_service_used_list, :operator_spec_information, :text
+  attr_accessor :basic_call_information, :location_information, :equipment_identifier, :basic_service_used_list, :operator_spec_information, :text, :receipt_text
 
   def initialize(basic_call_information, location_information, equipment_identifier, basic_service_used_list, operator_spec_information)
     @basic_call_information = basic_call_information
