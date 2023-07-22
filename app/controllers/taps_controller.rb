@@ -1,13 +1,24 @@
 require 'pp'
 
 class TapsController < ApplicationController
+  include ActiveStorage::SetCurrent
+
   def index
+    @tap = Tap.new
+  end
 
-    file_path = Rails.public_path.join('asn1_files', 'CDFRAF1MDGTM42711')
-    file_exists = File.exist?(file_path)
-    puts "file exists: #{file_exists}"
+  def upload
+    @tap = Tap.create(tap_params)
+    redirect_to action: 'decode', id: @tap.id
+  end
 
-    @transfer_batch = Asn1Decoder.decode_asn1_der(file_path)
+  def decode
+
+    @tap = Tap.find(params[:id])
+    der_data = @tap.file.download
+    puts der_data
+
+    @transfer_batch = Asn1Decoder.decode_asn1_der(der_data)
 
     @batch_control_info = @transfer_batch.batch_control_info
     @accounting_info = @transfer_batch.accounting_info
@@ -17,6 +28,54 @@ class TapsController < ApplicationController
 
     @transfer_batch_json = @transfer_batch.to_json
 
+    call_details = []
+    @call_event_details.each do |call_event_detail|
+      call_detail = CallDetail.new
+
+      chargeable_subscriber = call_event_detail.basic_call_information.chargeable_subscriber.last
+      call_detail.imsi = chargeable_subscriber.imsi
+      call_detail.msisdn = chargeable_subscriber.msisdn
+
+      unless call_event_detail.basic_call_information.call_originator.nil?
+        call_originator = call_event_detail.basic_call_information.call_originator
+        call_detail.bnum = call_originator.calling_number
+      end
+
+      unless call_event_detail.basic_call_information.destination.nil?
+        destination = call_event_detail.basic_call_information.destination
+        call_detail.bnum = destination.called_number
+      end
+
+      call_event_start_timestamp = call_event_detail.basic_call_information.call_event_start_timestamp
+      call_detail.call_timestamp = call_event_start_timestamp.local_timestamp
+
+      total_charge = 0
+      charge_units = 0
+      call_event_detail.basic_service_used_list.each do |basic_service_used|
+        basic_service_used.charge_information_list.each do |charge_information|
+          charge_information.charge_detail_list.each do |charge_detail|
+            total_charge += charge_detail.charge.to_i
+            charge_units += charge_detail.charged_units.to_i
+          end
+        end
+      end
+      call_detail.charge = total_charge
+      call_detail.charge_units = charge_units
+
+      call_details << call_detail
+    end
+
+    @tap.call_details = call_details
+    
+    @tap.total_charge = @audit_control_info.total_charge
+    @tap.total_discount = @audit_control_info.total_discount_value
+    @tap.total_tax = @audit_control_info.total_tax_value
+
+    @tap.save
+
+  end
+
+  def receipt
     items = [
       ["<b>Communications</b>", "<b>Montant SDR</b>", "<b>Montant Ariary TTC</b>"]
     ]
@@ -33,7 +92,6 @@ class TapsController < ApplicationController
       end
     end
 
-    sdr_stock = * 0.00001
     items << ["Total", to_sdr(@audit_control_info.total_charge), to_ariary_ttc(@audit_control_info.total_charge)]
     items << ["<b>Autres frais divers</b>", nil, nil]
     items << ["Taxe(s)", to_sdr(@audit_control_info.total_tax_value), to_ariary_ttc(@audit_control_info.total_tax_value)]
@@ -70,7 +128,6 @@ class TapsController < ApplicationController
 
     # Writes the PDF to disk
     r.render_file "receipt.pdf"
-
   end
 
   private
@@ -86,6 +143,10 @@ class TapsController < ApplicationController
     total = to_sdr(amount) * sdr_ariary_change
 
     total.floor(2).to_s
+  end
+
+  def tap_params
+    params.require(:tap).permit(:id, :name, :file)
   end
 
 end

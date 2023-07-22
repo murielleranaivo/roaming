@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  imsi: MyString
+  msisdn: MyString
+  bnum: MyString
+  call_timestamp: MyString
+  charge: 1
+  charge_units: 1
+
+two:
+  imsi: MyString
+  msisdn: MyString
+  bnum: MyString
+  call_timestamp: MyString
+  charge: 1
+  charge_units: 1

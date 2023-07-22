@@ -1,8 +1,11 @@
-Rails.application.routes.draw do 
+Rails.application.routes.draw do
   get 'taps/index'
-  
+
   root to: 'taps#index'
   get '/login', to: 'sessions#login'
+
+  post '/upload', to: 'taps#upload'
+  get '/decode', to: 'taps#decode'
 
   post '/sessions', to: 'sessions#create'
 
@@ -11,9 +14,8 @@ Rails.application.routes.draw do
   get '/register', to: 'users#register'
 
   post '/users', to: 'users#create'
-  
-  get '/index', to: 'pages#index', as: 'index'
 
+  get '/index', to: 'pages#index', as: 'index'
 
 end
  
