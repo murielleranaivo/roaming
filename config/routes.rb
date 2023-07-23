@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#login'
 
   post '/upload', to: 'taps#upload'
-  get '/decode', to: 'taps#decode'
+  get '/decode/:id', to: 'taps#decode'
+  get '/download/:id', to: 'taps#receipt', as: 'download_file'
 
   post '/sessions', to: 'sessions#create'
 

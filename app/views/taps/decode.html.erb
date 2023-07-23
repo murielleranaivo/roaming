@@ -243,6 +243,10 @@
     </ul>
   </div>
 
+  <div>
+    <%= link_to 'Facture', download_file_path(@tap.id, format: :pdf), class: "btn btn-warning" %>
+  </div>
+
   <script>
       document.addEventListener('DOMContentLoaded', function() {
           $('#jsTree').jstree();
