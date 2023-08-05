@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
         #lookup the user in the database
         @user = User.find_by(email: user_params[:email])
         #compare their password
-        if @user && @user.password_digest == BCrypt::Password.create(user_params[:password_digest])
+        if @user.authenticate(user_params[:password])
             session[:user_id] = @user.id
-            redirect_to '/index'
+            redirect_to '/about'
         else
             flash.now[:notice] ="Invalid password!"
             render :login
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     private
 
         def user_params
-            params.require(:user).permit(:email, :password_digest)
+            params.require(:user).permit(:email, :password)
         end
 
     

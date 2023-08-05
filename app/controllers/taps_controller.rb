@@ -129,6 +129,10 @@ class TapsController < ApplicationController
     send_data r.render, filename: "Test", type: "application/pdf", disposition: :inline
   end
 
+  def history
+    @taps = Tap.all
+  end
+
   private
 
   def to_sdr(amount)

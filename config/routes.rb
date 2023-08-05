@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'taps/index'
 
-  root to: 'taps#index'
+  root to: 'sessions#login'
   get '/login', to: 'sessions#login'
 
   post '/upload', to: 'taps#upload'
@@ -16,7 +16,15 @@ Rails.application.routes.draw do
 
   post '/users', to: 'users#create'
 
-  get '/index', to: 'pages#index', as: 'index'
+  get '/index', to: 'taps#index', as: 'index'
+
+  get '/about', to: 'taps#about', as: 'about'
+
+  get '/feature', to: 'taps#feature', as: 'feature'
+
+  get '/pages', to: 'pages#index'
+
+  get '/history', to: 'taps#history'
 
 end
  

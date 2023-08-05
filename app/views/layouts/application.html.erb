@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- JS Tree -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-
+    <%= stylesheet_link_tag 'jstree.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
     <!-- Nunito -->
     <link
       href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -19,6 +19,10 @@
     <!-- Application -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
     <title>Stage</title>
 
   </head>
@@ -26,8 +30,9 @@
   <body id="page-top" class="bg-gradient-primary">
     <%= yield %>
 
+    <%= javascript_include_tag 'jquery.min', 'data-turbolinks-track': 'reload' %>
+
     <!-- Bootstrap core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
     <%= javascript_include_tag 'bootstrap.bundle.min', 'data-turbolinks-track': 'reload' %>
 
     <!-- Core plugin JavaScript -->
@@ -37,6 +42,7 @@
     <%= javascript_include_tag 'sb-admin-2.min', 'data-turbolinks-track': 'reload' %>
 
     <!-- JSTree -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <%= javascript_include_tag 'jstree.min', 'data-turbolinks-track': 'reload' %>
+
   </body>
 </html>

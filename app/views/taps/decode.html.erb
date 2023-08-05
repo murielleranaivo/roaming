@@ -1,255 +1,412 @@
-<div class="container">
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <div class="sidebar-brand-icon rotate-n-15">
+        <i class="fas fa-file"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">TAPedit</div>
+    </a>
 
-  <div id="jsTree">
-    <ul>
-      <li class="jstree-open">TransferBatch
+   
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Heading 
+    <div class="sidebar-heading">
+      Home
+    </div> -->
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+        aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-fw fa-home"></i>
+        <span>Home</span>
+      </a>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Components:</h6>
+          <a class="collapse-item" href="/about">About</a>
+          <a class="collapse-item" href="/feature">Features</a>
+        </div>
+      </div>
+    </li>
+
+     <!-- Divider -->
+    <hr class="sidebar-divider ">
+
+    <!-- Nav Item - Dashboard tachometer-alt-->
+    <li class="nav-item active">
+      <a class="nav-link" href="index.html">
+        <i class="fas fa-fw fa-folder-open"></i>
+        <span>Upload TAP file</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+  </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+      <!-- Sidebar Toggle (Topbar) -->
+      <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+      </button>
+      
+      <!-- Topbar Navbar -->
+      <ul class="navbar-nav ml-auto">
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+          <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Deconnexion</span>
+              <%= image_tag 'logout.jpg', class: "img-profile rounded-circle" %>
+            </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <!--<a class="dropdown-item" href="#">
+              <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+              Profile
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+              Settings
+            </a>
+            <a class="dropdown-item" href="#">
+              <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              Activity Log
+            </a>
+          <div class="dropdown-divider"></div>-->
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
+      </ul>
+      </nav>
+    <!-- Begin Page Content -->
+  <div class="container-fluid" text-align="center">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Contents TAP file</h1>
+    </div>
+
+
+    <div class="container">
+
+      <div id="jsTree">
         <ul>
-          <li>BatchControlInfo
+          <li class="jstree-open">TransferBatch
             <ul>
-              <li>Sender: <%= @batch_control_info.sender %></li>
-              <li>Recipient: <%= @batch_control_info.recipient %></li>
-              <li>FileSequenceNumber: <%= @batch_control_info.file_sequence_number %></li>
-              <li>FileCreationTimeStamp
+              <li>BatchControlInfo
                 <ul>
-                  <li>LocalTimeStamp: <%= @batch_control_info.file_creation_timestamp.local_timestamp %></li>
-                  <li>UtcTimeOffset: <%= @batch_control_info.file_creation_timestamp.utc_time_offset %></li>
+                  <li>Sender: <%= @batch_control_info.sender %></li>
+                  <li>Recipient: <%= @batch_control_info.recipient %></li>
+                  <li>FileSequenceNumber: <%= @batch_control_info.file_sequence_number %></li>
+                  <li>FileCreationTimeStamp
+                    <ul>
+                      <li>LocalTimeStamp: <%= @batch_control_info.file_creation_timestamp.local_timestamp %></li>
+                      <li>UtcTimeOffset: <%= @batch_control_info.file_creation_timestamp.utc_time_offset %></li>
+                    </ul>
+                  </li>
+                  <li>TransferCutOffTimeStamp
+                    <ul>
+                      <li>LocalTimeStamp: <%= @batch_control_info.transfer_cutoff_timestamp.local_timestamp %></li>
+                      <li>UtcTimeOffset: <%= @batch_control_info.transfer_cutoff_timestamp.utc_time_offset %></li>
+                    </ul>
+                  </li>
+                  <li>FileAvailableTimeStamp
+                    <ul>
+                      <li>LocalTimeStamp: <%= @batch_control_info.file_available_timestamp.local_timestamp %></li>
+                      <li>UtcTimeOffset: <%= @batch_control_info.file_available_timestamp.utc_time_offset %></li>
+                    </ul>
+                  </li>
+                  <li>SpecificationVersionNumber: <%= @batch_control_info.specification_version_number %></li>
+                  <li>ReleaseVersionNumber: <%= @batch_control_info.release_version_number %></li>
                 </ul>
               </li>
-              <li>TransferCutOffTimeStamp
+              <li>AccountingInfo
                 <ul>
-                  <li>LocalTimeStamp: <%= @batch_control_info.transfer_cutoff_timestamp.local_timestamp %></li>
-                  <li>UtcTimeOffset: <%= @batch_control_info.transfer_cutoff_timestamp.utc_time_offset %></li>
-                </ul>
-              </li>
-              <li>FileAvailableTimeStamp
-                <ul>
-                  <li>LocalTimeStamp: <%= @batch_control_info.file_available_timestamp.local_timestamp %></li>
-                  <li>UtcTimeOffset: <%= @batch_control_info.file_available_timestamp.utc_time_offset %></li>
-                </ul>
-              </li>
-              <li>SpecificationVersionNumber: <%= @batch_control_info.specification_version_number %></li>
-              <li>ReleaseVersionNumber: <%= @batch_control_info.release_version_number %></li>
-            </ul>
-          </li>
-          <li>AccountingInfo
-            <ul>
-              <li>LocalCurrency: <%= @accounting_info.local_currency %></li>
-              <li>TapCurrency: <%= @accounting_info.tap_currency %></li>
-              <li>CurrencyConversionInfo
-                <ul>
-                  <%= @accounting_info.currency_conversion_info.each do |currency_conversion| %>
-                    <li>CurrencyConversion
-                      <ul>
-                        <li>ExchangeRateCode:<%=  currency_conversion.exchange_rate_code  %></li>
-                        <li>NumberOfDecimalPlaces: <%= currency_conversion.number_of_decimal_places %></li>
-                        <li>ExchangeRate:<%=  currency_conversion.exchange_rate  %></li>
-                      </ul>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-              <li>TapDecimalPlaces: <%= @accounting_info.tap_decimal_places %></li>
-            </ul>
-          </li>
-          <li>NetworkInfo
-            <ul>
-              <li>UtcTimeOffsetInfo
-                <% @network_info.utc_time_offset_info.each do |utc_time_offset_info| %>
-                  <ul>
-                    <li>UtcTimeOffsetInfo
-                      <ul>
-                        <li>UtcTimeOffsetCode: <%= utc_time_offset_info.utc_time_offset_code %></li>
-                        <li>UtcTimeOffset: <%= utc_time_offset_info.utc_time_offset %></li>
-                      </ul>
-                    </li>
-                  </ul>
-                <% end %>
-              </li>
-              <li>RecEntityInfo
-                <ul>
-                  <% @network_info.rec_entity_info.each do |rec_entity_info| %>
-                    <li>RecEntityInformation
-                      <ul>
-                        <li>RecEntityCode: <%= rec_entity_info.rec_entity_code %></li>
-                        <li>RecEntityType: <%= rec_entity_info.rec_entity_type %></li>
-                        <li>RecEntityId: <%= rec_entity_info.rec_entity_id %></li>
-                      </ul>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li>CallEventDetails
-            <ul>
-              <% @call_event_details.each do |call_event_detail| %>
-                <% basic_call_information = call_event_detail.basic_call_information %>
-                <% network_location = call_event_detail.location_information.network_location %>
-                <% equipment_identifier = call_event_detail.equipment_identifier %>
-                <% operator_spec_information = call_event_detail.operator_spec_information %>
-                <% basic_service_used_list = call_event_detail.basic_service_used_list %>
-                <li><%= call_event_detail.text %>
-                  <ul>
-                    <li>BasicCallInformation
-                      <ul>
-                        <li>ChargeableSubscriber
+                  <li>LocalCurrency: <%= @accounting_info.local_currency %></li>
+                  <li>TapCurrency: <%= @accounting_info.tap_currency %></li>
+                  <li>CurrencyConversionInfo
+                    <ul>
+                      <%= @accounting_info.currency_conversion_info.each do |currency_conversion| %>
+                        <li>CurrencyConversion
                           <ul>
-                            <% basic_call_information.chargeable_subscriber.each do |sim_chargeable_subscriber| %>
-                              <li>SimChargeableSubscriber
+                            <li>ExchangeRateCode:<%=  currency_conversion.exchange_rate_code  %></li>
+                            <li>NumberOfDecimalPlaces: <%= currency_conversion.number_of_decimal_places %></li>
+                            <li>ExchangeRate:<%=  currency_conversion.exchange_rate  %></li>
+                          </ul>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                  <li>TapDecimalPlaces: <%= @accounting_info.tap_decimal_places %></li>
+                </ul>
+              </li>
+              <li>NetworkInfo
+                <ul>
+                  <li>UtcTimeOffsetInfo
+                    <% @network_info.utc_time_offset_info.each do |utc_time_offset_info| %>
+                      <ul>
+                        <li>UtcTimeOffsetInfo
+                          <ul>
+                            <li>UtcTimeOffsetCode: <%= utc_time_offset_info.utc_time_offset_code %></li>
+                            <li>UtcTimeOffset: <%= utc_time_offset_info.utc_time_offset %></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    <% end %>
+                  </li>
+                  <li>RecEntityInfo
+                    <ul>
+                      <% @network_info.rec_entity_info.each do |rec_entity_info| %>
+                        <li>RecEntityInformation
+                          <ul>
+                            <li>RecEntityCode: <%= rec_entity_info.rec_entity_code %></li>
+                            <li>RecEntityType: <%= rec_entity_info.rec_entity_type %></li>
+                            <li>RecEntityId: <%= rec_entity_info.rec_entity_id %></li>
+                          </ul>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>CallEventDetails
+                <ul>
+                  <% @call_event_details.each do |call_event_detail| %>
+                    <% basic_call_information = call_event_detail.basic_call_information %>
+                    <% network_location = call_event_detail.location_information.network_location %>
+                    <% equipment_identifier = call_event_detail.equipment_identifier %>
+                    <% operator_spec_information = call_event_detail.operator_spec_information %>
+                    <% basic_service_used_list = call_event_detail.basic_service_used_list %>
+                    <li><%= call_event_detail.text %>
+                      <ul>
+                        <li>BasicCallInformation
+                          <ul>
+                            <li>ChargeableSubscriber
+                              <ul>
+                                <% basic_call_information.chargeable_subscriber.each do |sim_chargeable_subscriber| %>
+                                  <li>SimChargeableSubscriber
+                                    <ul>
+                                      <li>Imsi: <%= sim_chargeable_subscriber.imsi %></li>
+                                      <li>Msisdn: <%= sim_chargeable_subscriber.msisdn %></li>
+                                    </ul>
+                                  </li>
+                                <% end %>
+                              </ul>
+                            </li>
+                            <% if basic_call_information.destination %>
+                              <li>Destination
                                 <ul>
-                                  <li>Imsi: <%= sim_chargeable_subscriber.imsi %></li>
-                                  <li>Msisdn: <%= sim_chargeable_subscriber.msisdn %></li>
+                                  <li>CalledNumber: <%= basic_call_information.destination.called_number %></li>
+                                  <li>DialledDigits: <%= basic_call_information.destination.dialled_digits %></li>
+                                  <li>SMSDestinationNumber: <%= basic_call_information.destination.sms_destination_number %></li>
+                                </ul>
+                              </li>
+                            <% end %>
+                            <% if basic_call_information.call_originator %>
+                              <li>CallOriginator
+                                <ul>
+                                  <li>CallingNumber: <%= basic_call_information.call_originator.calling_number %></li>
+                                  <% if basic_call_information.call_originator.sms_originator %>
+                                    <li>SMSOriginator: <%= basic_call_information.call_originator.sms_originator  %></li>
+                                  <% end %>
+                                </ul>
+                              </li>
+                            <% end %>
+                            <li>CallEventStartTimeStamp
+                              <ul>
+                                <li>LocalTimeStamp: <%= basic_call_information.call_event_start_timestamp.local_timestamp %></li>
+                                <li>UtcTimeOffsetCode: <%= basic_call_information.call_event_start_timestamp.utc_time_offset_code %></li>
+                              </ul>
+                            </li>
+                            <li>TotalCallEventDuration: <%= basic_call_information.total_call_event_duration %></li>
+                          </ul>
+                        </li>
+                        <li>LocationInformation
+                          <ul>
+                            <li>NetworkLocation
+                              <ul>
+                                <li>RecEntityCode: <%= network_location.rec_entity_code %></li>
+                                <li>CallReference: <%= network_location.call_reference %></li>
+                                <li>LocationArea: <%= network_location.location_area %></li>
+                                <li>CellId: <%= network_location.cell_id %></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>EquipmentIdentifier
+                          <ul>
+                            <li>Imei: <%= equipment_identifier.imei %></li>
+                          </ul>
+                        </li>
+                        <li>BasicServiceUsedList
+                          <ul>
+                            <% basic_service_used_list.each do |basic_service_used| %>
+                              <li>BasicServiceUsed
+                                <ul>
+                                  <li>BasicService
+                                    <ul>
+                                      <li>ServiceCode
+                                        <ul>
+                                          <li>TeleServiceCode: <%= basic_service_used.basic_service.service_code %></li>
+                                        </ul>
+                                      </li>
+                                    </ul>
+                                  </li>
+                                  <li>ChargingTimeStamp
+                                    <ul>
+                                      <li>LocalTimeStamp: <%= basic_service_used.charging_timestamp.local_timestamp %></li>
+                                      <li>UtcTimeOffsetCode: <%= basic_service_used.charging_timestamp.utc_time_offset_code %></li>
+                                    </ul>
+                                  </li>
+                                  <li>ChargeInformationList
+                                    <ul>
+                                      <% basic_service_used.charge_information_list.each do |charge_information| %>
+                                        <li>ChargeInformation
+                                          <ul>
+                                            <li>ChargedItem: <%= charge_information.charged_item %></li>
+                                            <li>ExchangeRateCode: <%= charge_information.exchange_rate_code %></li>
+                                            <li>ChargeDetailList
+                                              <ul>
+                                                <% charge_information.charge_detail_list.each do |charge_detail| %>
+                                                  <li>ChargeType: <%= charge_detail.charge_type %></li>
+                                                  <li>Charge: <%= charge_detail.charge %></li>
+                                                  <li>ChargedUnits: <%= charge_detail.charged_units %></li>
+                                                  <li>ChargeDetailTimeStamp
+                                                    <ul>
+                                                      <li>LocalTimeStamp: <%= charge_detail.charge_detail_timestamp.local_timestamp %></li>
+                                                      <li>UtcTimeOffsetCode: <%= charge_detail.charge_detail_timestamp.utc_time_offset_code %></li>
+                                                    </ul>
+                                                  </li>
+                                                <% end %>
+                                              </ul>
+                                            </li>
+                                          </ul>
+                                        </li>
+                                      <% end %>
+                                    </ul>
+                                  </li>
                                 </ul>
                               </li>
                             <% end %>
                           </ul>
                         </li>
-                        <% if basic_call_information.destination %>
-                          <li>Destination
-                            <ul>
-                              <li>CalledNumber: <%= basic_call_information.destination.called_number %></li>
-                              <li>DialledDigits: <%= basic_call_information.destination.dialled_digits %></li>
-                              <li>SMSDestinationNumber: <%= basic_call_information.destination.sms_destination_number %></li>
-                            </ul>
-                          </li>
-                        <% end %>
-                        <% if basic_call_information.call_originator %>
-                          <li>CallOriginator
-                            <ul>
-                              <li>CallingNumber: <%= basic_call_information.call_originator.calling_number %></li>
-                              <% if basic_call_information.call_originator.sms_originator %>
-                                <li>SMSOriginator: <%= basic_call_information.call_originator.sms_originator  %></li>
-                              <% end %>
-                            </ul>
-                          </li>
-                        <% end %>
-                        <li>CallEventStartTimeStamp
+                        <li>OperatorSpecInformation
                           <ul>
-                            <li>LocalTimeStamp: <%= basic_call_information.call_event_start_timestamp.local_timestamp %></li>
-                            <li>UtcTimeOffsetCode: <%= basic_call_information.call_event_start_timestamp.utc_time_offset_code %></li>
-                          </ul>
-                        </li>
-                        <li>TotalCallEventDuration: <%= basic_call_information.total_call_event_duration %></li>
-                      </ul>
-                    </li>
-                    <li>LocationInformation
-                      <ul>
-                        <li>NetworkLocation
-                          <ul>
-                            <li>RecEntityCode: <%= network_location.rec_entity_code %></li>
-                            <li>CallReference: <%= network_location.call_reference %></li>
-                            <li>LocationArea: <%= network_location.location_area %></li>
-                            <li>CellId: <%= network_location.cell_id %></li>
+                            <li>OperatorSpecInformation: <%= operator_spec_information %></li>
                           </ul>
                         </li>
                       </ul>
                     </li>
-                    <li>EquipmentIdentifier
-                      <ul>
-                        <li>Imei: <%= equipment_identifier.imei %></li>
-                      </ul>
-                    </li>
-                    <li>BasicServiceUsedList
-                      <ul>
-                        <% basic_service_used_list.each do |basic_service_used| %>
-                          <li>BasicServiceUsed
-                            <ul>
-                              <li>BasicService
-                                <ul>
-                                  <li>ServiceCode
-                                    <ul>
-                                      <li>TeleServiceCode: <%= basic_service_used.basic_service.service_code %></li>
-                                    </ul>
-                                  </li>
-                                </ul>
-                              </li>
-                              <li>ChargingTimeStamp
-                                <ul>
-                                  <li>LocalTimeStamp: <%= basic_service_used.charging_timestamp.local_timestamp %></li>
-                                  <li>UtcTimeOffsetCode: <%= basic_service_used.charging_timestamp.utc_time_offset_code %></li>
-                                </ul>
-                              </li>
-                              <li>ChargeInformationList
-                                <ul>
-                                  <% basic_service_used.charge_information_list.each do |charge_information| %>
-                                    <li>ChargeInformation
-                                      <ul>
-                                        <li>ChargedItem: <%= charge_information.charged_item %></li>
-                                        <li>ExchangeRateCode: <%= charge_information.exchange_rate_code %></li>
-                                        <li>ChargeDetailList
-                                          <ul>
-                                            <% charge_information.charge_detail_list.each do |charge_detail| %>
-                                              <li>ChargeType: <%= charge_detail.charge_type %></li>
-                                              <li>Charge: <%= charge_detail.charge %></li>
-                                              <li>ChargedUnits: <%= charge_detail.charged_units %></li>
-                                              <li>ChargeDetailTimeStamp
-                                                <ul>
-                                                  <li>LocalTimeStamp: <%= charge_detail.charge_detail_timestamp.local_timestamp %></li>
-                                                  <li>UtcTimeOffsetCode: <%= charge_detail.charge_detail_timestamp.utc_time_offset_code %></li>
-                                                </ul>
-                                              </li>
-                                            <% end %>
-                                          </ul>
-                                        </li>
-                                      </ul>
-                                    </li>
-                                  <% end %>
-                                </ul>
-                              </li>
-                            </ul>
-                          </li>
-                        <% end %>
-                      </ul>
-                    </li>
-                    <li>OperatorSpecInformation
-                      <ul>
-                        <li>OperatorSpecInformation: <%= operator_spec_information %></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              <% end %>
-            </ul>
-          </li>
-          <li>AuditControlInfo
-            <ul>
-              <li>EarliestCallTimeStamp
-                <ul>
-                  <li>LocalTimeStamp: <%= @audit_control_info.earliest_call_timestamp.local_timestamp %></li>
-                  <li>UtcTimeOffset: <%= @audit_control_info.earliest_call_timestamp.utc_time_offset %></li>
-                </ul>
-              </li>
-              <li>LatestCallTimeStamp
-                <ul>
-                  <li>LocalTimeStamp: <%= @audit_control_info.latest_call_timestamp.local_timestamp %></li>
-                  <li>UtcTimeOffset: <%= @audit_control_info.latest_call_timestamp.utc_time_offset %></li>
-                </ul>
-              </li>
-              <li>TotalCharge: <%= @audit_control_info.total_charge %></li>
-              <li>TotalTaxValue: <%= @audit_control_info.total_tax_value %></li>
-              <li>TotalDiscountValue: <%= @audit_control_info.total_discount_value %></li>
-              <li>CallEventDetailsCount: <%= @audit_control_info.call_event_details_count %></li>
-              <li>OperatorSpecInformation
-                <ul>
-                  <% @audit_control_info.operator_spec_information.each do |operator_spec_information| %>
-                    <li>OperatorSpecInformation: <%= operator_spec_information.operator_spec_information %></li>
                   <% end %>
+                </ul>
+              </li>
+              <li>AuditControlInfo
+                <ul>
+                  <li>EarliestCallTimeStamp
+                    <ul>
+                      <li>LocalTimeStamp: <%= @audit_control_info.earliest_call_timestamp.local_timestamp %></li>
+                      <li>UtcTimeOffset: <%= @audit_control_info.earliest_call_timestamp.utc_time_offset %></li>
+                    </ul>
+                  </li>
+                  <li>LatestCallTimeStamp
+                    <ul>
+                      <li>LocalTimeStamp: <%= @audit_control_info.latest_call_timestamp.local_timestamp %></li>
+                      <li>UtcTimeOffset: <%= @audit_control_info.latest_call_timestamp.utc_time_offset %></li>
+                    </ul>
+                  </li>
+                  <li>TotalCharge: <%= @audit_control_info.total_charge %></li>
+                  <li>TotalTaxValue: <%= @audit_control_info.total_tax_value %></li>
+                  <li>TotalDiscountValue: <%= @audit_control_info.total_discount_value %></li>
+                  <li>CallEventDetailsCount: <%= @audit_control_info.call_event_details_count %></li>
+                  <li>OperatorSpecInformation
+                    <ul>
+                      <% @audit_control_info.operator_spec_information.each do |operator_spec_information| %>
+                        <li>OperatorSpecInformation: <%= operator_spec_information.operator_spec_information %></li>
+                      <% end %>
+                    </ul>
+                  </li>
                 </ul>
               </li>
             </ul>
           </li>
         </ul>
-      </li>
-    </ul>
+      </div>
+      <br>
+      <div>
+        <%= link_to 'Facture', download_file_path(@tap.id, format: :pdf), class: "btn btn-success" %>
+      </div>
+
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              $('#jsTree').jstree();
+          });
+      </script>
+    </div>             
+    
+    <!-- End of Main Content -->
   </div>
 
-  <div>
-    <%= link_to 'Facture', download_file_path(@tap.id, format: :pdf), class: "btn btn-warning" %>
-  </div>
-
-  <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          $('#jsTree').jstree();
-      });
-  </script>
+  <!-- End of Topbar -->
 </div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+  <div class="container my-auto">
+    <div class="copyright text-center my-auto">
+      <span>Copyright &copy; 2023</span>
+    </div>
+  </div>
+</footer>
+<!-- End of Footer -->
+
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

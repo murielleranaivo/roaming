@@ -21,3 +21,9 @@
 html, body {
     height: 100%;
 }
+
+.jstree-anchor, .jstree-anchor:link, .jstree-anchor:visited, .jstree-anchor:hover, .jstree-anchor:active {
+    text-decoration: none;
+    color: black !important;
+    
+  }
