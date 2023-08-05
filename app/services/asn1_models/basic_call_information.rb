@@ -2,10 +2,10 @@ require_relative 'call_originator'
 require_relative 'timestamp_offset'
 require_relative 'sim_chargeable_subscriber'
 require_relative 'destination'
+require 'pp'
 
 class BasicCallInformation
-  attr_accessor :chargeable_subscriber, :destination, :call_originator, :call_event_start_timestamp, :total_call_event_duration
-
+  attr_accessor :chargeable_subscriber,:destination, :call_originator, :call_event_start_timestamp, :total_call_event_duration
   def initialize(chargeable_subscriber, call_event_start_timestamp, total_call_event_duration, call_originator = nil, destination = nil)
     @chargeable_subscriber = chargeable_subscriber
     @destination = destination
@@ -13,10 +13,10 @@ class BasicCallInformation
     @call_event_start_timestamp = call_event_start_timestamp
     @total_call_event_duration = total_call_event_duration
   end
-
+  
   def self.from_map(map)
     chargeable_subscriber = []
-    map[0][427].each do |element|
+    map[0][427].each do | element |
       sim_chargeable_subscriber = SimChargeableSubscriber.from_map(element[199])
       chargeable_subscriber.push(sim_chargeable_subscriber)
     end
@@ -32,33 +32,4 @@ class BasicCallInformation
     total_call_event_duration = Utils.ascii_to_i(map[3][223])
     new(chargeable_subscriber, call_event_start_timestamp, total_call_event_duration, call_originator, destination)
   end
-
-  def as_json(options = {})
-    if @destination == nil
-      temp = @call_originator
-    else
-      temp = @destination
-    end
-    {
-      text: 'BasicCallInformation',
-      children: [
-        {
-          text: 'ChargeableSubscriber',
-          children: @chargeable_subscriber
-        },
-        temp,
-        {
-          text: 'CallEventStartTimestamp',
-          children: @call_event_start_timestamp
-        },
-        { text: "TotalCallEventDuration: #{@total_call_event_duration}" }
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

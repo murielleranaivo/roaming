@@ -26,30 +26,11 @@ class MobileCall
     location_information = LocationInformation.from_map(map[1][138])
     equipment_identifier = EquipmentIdentifier.from_map(map[2][429])
     basic_service_used_list = []
-    map[3][38].each do |element|
+    map[3][38].each do | element |
       basic_service_used = BasicServiceUsed.from_map(element[39])
       basic_service_used_list.push(basic_service_used)
     end
     operator_spec_information = OperatorSpecInformation.from_map(map[4][162])
     new(basic_call_information, location_information, equipment_identifier, basic_service_used_list, operator_spec_information)
   end
-
-  def as_json(options = {})
-    {
-      text: text,
-      children: [
-        @basic_call_information,
-        @location_information,
-        @equipment_identifier,
-        @basic_service_used_list,
-        @operator_spec_information
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

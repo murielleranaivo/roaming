@@ -2,8 +2,8 @@ require_relative '../utils'
 
 class CurrencyConversion
   attr_accessor :exchange_rate_code, :number_of_decimal_places, :exchange_rate
-
-  def initialize(exchange_rate_code, number_of_decimal_places, exchange_rate)
+  
+  def initialize(exchange_rate_code,number_of_decimal_places,exchange_rate)
     @exchange_rate_code = exchange_rate_code
     @number_of_decimal_places = number_of_decimal_places
     @exchange_rate = exchange_rate
@@ -15,21 +15,4 @@ class CurrencyConversion
     exchange_rate = Utils.ascii_to_i(map[2][104])
     new(exchange_rate_code, number_of_decimal_places, exchange_rate)
   end
-
-  def as_json(options = {})
-    {
-      text: 'CurrencyConversion',
-      children: [
-        { text: "ExchangeRateCode: #{@exchange_rate_code}" },
-        { text: "NumberOfDecimalPlaces: #{@number_of_decimal_places}" },
-        { text: "ExchangeRate: #{@exchange_rate}" }
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

@@ -25,28 +25,4 @@ class BatchControlInfo
     release_version_number = Utils.ascii_to_i(map[7][189])
     new(sender, recipient, file_sequence_number, file_creation_timestamp, transfer_cutoff_timestamp, file_available_timestamp, specification_version_number, release_version_number)
   end
-
-  def as_json(options = {})
-    @file_creation_timestamp.text = 'FileCreationTimeStamp'
-    @transfer_cutoff_timestamp.text = 'TransferCutoffTimeStamp'
-    @file_available_timestamp.text = 'FileAvailableTimeStamp'
-    {
-      text: 'BatchControlInfo',
-      children: [
-        { text: "Sender: #{@sender}" },
-        { text: "Recipient: #{@recipient}" },
-        { text: "FileSequenceNumber: #{@file_sequence_number}" },
-        @file_creation_timestamp,
-        @transfer_cutoff_timestamp,
-        @file_available_timestamp,
-        { text: "SpecificationVersionNumber: #{@specification_version_number}" },
-        { text: "ReleaseVersionNumber: #{@release_version_number}" }
-      ]
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

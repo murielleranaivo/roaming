@@ -4,7 +4,6 @@ require_relative 'call_type_group'
 
 class ChargeInformation
   attr_accessor :charged_item, :exchange_rate_code, :charge_detail_list, :call_type_group
-
   def initialize(charged_item, exchange_rate_code, charge_detail_list, call_type_group = nil)
     @charged_item = charged_item
     @exchange_rate_code = exchange_rate_code
@@ -17,7 +16,7 @@ class ChargeInformation
     exchange_rate_code = Utils.ascii_to_i(map[1][105])
     charge_detail_list = []
     if map[2][64] != nil
-      map[2][64].each do |element|
+      map[2][64].each do | element |
         charge_detail = ChargeDetail.from_map(element[63])
         charge_detail_list.push(charge_detail)
       end
@@ -25,35 +24,11 @@ class ChargeInformation
     call_type_group = nil
     if map[2][258] != nil
       call_type_group = CallTypeGroup.from_map(map[2][258])
-      map[3][64].each do |element|
+      map[3][64].each do | element |
         charge_detail = ChargeDetail.from_map(element[63])
         charge_detail_list.push(charge_detail)
       end
     end
     new(charged_item, exchange_rate_code, charge_detail_list, call_type_group)
   end
-  
-  def as_json(options = {})
-    {
-      text: 'ChargeInformation',
-      children: [
-        { text: "ChargedItem: #{@charged_item}" },
-        { text: "ExchangeRateCode: #{@exchange_rate_code}" },
-        {
-          text: 'ChargeDetailList',
-          children: @charge_detail_list
-        },
-        {
-          text: 'CallTypeGroup',
-          children: @call_type_group
-        }
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

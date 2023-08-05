@@ -2,7 +2,6 @@ require_relative '../utils'
 
 class EquipmentIdentifier
   attr_accessor :imei
-
   def initialize(imei)
     @imei = imei
   end
@@ -11,18 +10,4 @@ class EquipmentIdentifier
     imei = Utils.ascii_to_s(map[0][128])
     new(imei)
   end
-
-  def as_json(options = {})
-    {
-      text: "EquipmentIdentifier",
-      children: [
-        { text: "Imei: #{@imei}" }
-      ]
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

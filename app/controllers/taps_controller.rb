@@ -34,35 +34,58 @@ class TapsController < ApplicationController
 
       call_detail.receipt_text = call_event_detail.receipt_text
 
-      chargeable_subscriber = call_event_detail.basic_call_information.chargeable_subscriber.last
-      call_detail.imsi = chargeable_subscriber.imsi
-      call_detail.msisdn = chargeable_subscriber.msisdn
+      if call_event_detail.is_a? MobileCall
+        chargeable_subscriber = call_event_detail.basic_call_information.chargeable_subscriber.last
 
-      unless call_event_detail.basic_call_information.call_originator.nil?
-        call_originator = call_event_detail.basic_call_information.call_originator
-        call_detail.bnum = call_originator.calling_number
-      end
+        unless call_event_detail.basic_call_information.call_originator.nil?
+          call_originator = call_event_detail.basic_call_information.call_originator
+          call_detail.bnum = call_originator.calling_number
+        end
 
-      unless call_event_detail.basic_call_information.destination.nil?
-        destination = call_event_detail.basic_call_information.destination
-        call_detail.bnum = destination.called_number
-      end
+        unless call_event_detail.basic_call_information.destination.nil?
+          destination = call_event_detail.basic_call_information.destination
+          call_detail.bnum = destination.called_number
+        end
 
-      call_event_start_timestamp = call_event_detail.basic_call_information.call_event_start_timestamp
-      call_detail.call_timestamp = call_event_start_timestamp.local_timestamp
+        call_event_start_timestamp = call_event_detail.basic_call_information.call_event_start_timestamp
+        call_detail.call_timestamp = call_event_start_timestamp.local_timestamp
+  
+        total_charge = 0
+        charge_units = 0
+        call_event_detail.basic_service_used_list.each do |basic_service_used|
+          basic_service_used.charge_information_list.each do |charge_information|
+            charge_information.charge_detail_list.each do |charge_detail|
+              total_charge += charge_detail.charge.to_i
+              charge_units += charge_detail.charged_units.to_i
+            end
+          end
+        end
+        call_detail.charge = total_charge
+        call_detail.charge_units = charge_units
+      else
+        chargeable_subscriber = call_event_detail.gprs_basic_call_information.gprs_chargeable_subscriber.chargeable_subscriber.last
 
-      total_charge = 0
-      charge_units = 0
-      call_event_detail.basic_service_used_list.each do |basic_service_used|
-        basic_service_used.charge_information_list.each do |charge_information|
+        destination = call_event_detail.gprs_basic_call_information.gprs_destination
+        call_detail.bnum = destination.access_point_name_ni
+
+        call_event_start_timestamp = call_event_detail.gprs_basic_call_information.call_event_start_timestamp
+        call_detail.call_timestamp = call_event_start_timestamp.local_timestamp
+
+        total_charge = 0
+        charge_units = 0
+        call_event_detail.gprs_service_used.charge_information_list.each do |charge_information|
           charge_information.charge_detail_list.each do |charge_detail|
             total_charge += charge_detail.charge.to_i
             charge_units += charge_detail.charged_units.to_i
           end
         end
+        call_detail.charge = total_charge
+        call_detail.charge_units = charge_units
+
       end
-      call_detail.charge = total_charge
-      call_detail.charge_units = charge_units
+
+      call_detail.imsi = chargeable_subscriber.imsi
+      call_detail.msisdn = chargeable_subscriber.msisdn
 
       call_details << call_detail
     end

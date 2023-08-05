@@ -2,7 +2,6 @@ require_relative '../utils'
 
 class Destination
   attr_accessor :called_number, :dialled_digits, :sms_destination_number
-
   def initialize(called_number, dialled_digits, sms_destination_number)
     @called_number = called_number
     @dialled_digits = dialled_digits
@@ -15,20 +14,4 @@ class Destination
     sms_destination_number = map[2][419]
     new(called_number, dialled_digits, sms_destination_number)
   end
-
-  def as_json(options = {})
-    {
-      text: 'Destination',
-      children: [
-        { text: "CalledNumber: #{@called_number}" },
-        { text: "DialledDigits: #{@dialled_digits}" },
-        { text: "SmsDestinationNumber: #{@sms_destination_number}" }
-      ]
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

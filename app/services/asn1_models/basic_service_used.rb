@@ -4,7 +4,6 @@ require_relative 'charge_information'
 
 class BasicServiceUsed
   attr_accessor :basic_service, :charging_timestamp, :charge_information_list
-
   def initialize(basic_service, charging_timestamp, charge_information_list)
     @basic_service = basic_service
     @charging_timestamp = charging_timestamp
@@ -15,36 +14,10 @@ class BasicServiceUsed
     basic_service = BasicService.from_map(map[0][36])
     charging_timestamp = TimestampOffset.from_map(map[1][74])
     charge_information_list = []
-    map[2][70].each do |element|
+    map[2][70].each do | element |
       charge_information = ChargeInformation.from_map(element[69])
       charge_information_list.push(charge_information)
     end
     new(basic_service, charging_timestamp, charge_information_list)
   end
-
-  def as_json(options = {})
-    {
-      text: 'BasicServiceUsed',
-      children: [
-        {
-          text: 'BasicService',
-          children: @basic_service
-        },
-        {
-          text: 'ChargingTimestamp',
-          children: @charging_timestamp
-        },
-        {
-          text: 'ChargeInformationList',
-          children: @charge_information_list
-        }
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end

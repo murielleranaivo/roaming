@@ -2,8 +2,7 @@ require_relative '../utils'
 
 class NetworkLocation
   attr_accessor :rec_entity_code, :call_reference, :location_area, :cell_id
-
-  def initialize(rec_entity_code, call_reference, location_area, cell_id)
+  def initialize(rec_entity_code, call_reference,location_area, cell_id)
     @rec_entity_code = rec_entity_code
     @call_reference = call_reference
     @location_area = location_area
@@ -17,22 +16,4 @@ class NetworkLocation
     cell_id = Utils.ascii_to_i(map[3][59])
     new(rec_entity_code, call_reference, location_area, cell_id)
   end
-
-  def as_json(options = {})
-    {
-      text: "NetworkLocation",
-      children: [
-        { text: "RecEntityCode: #{@rec_entity_code}" },
-        { text: "CallReference: #{@call_reference}" },
-        { text: "LocationArea: #{@location_area}" },
-        { text: "CellId: #{@cell_id}" }
-      ]
-
-    }
-  end
-
-  def to_json(*options)
-    as_json(*options).to_json(*options)
-  end
-
 end
